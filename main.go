@@ -2,6 +2,8 @@ package main
 
 import (
 	"flag"
+
+	"github.com/r0ck3r008/gBTRx/cnfParse"
 )
 
 func main() {
@@ -11,10 +13,10 @@ func main() {
 	flag.Parse()
 
 	// Parse the peerInfo
-	var peers []peerT
-	parsePeerInfo(*peerInfo, peers)
+	var peers []cnfParse.PeerT
+	cnfParse.ParsePeerInfo(*peerInfo, peers)
 
 	// Parse the Common
-	var commonCfg commonT
-	parseCommonCfg(*common, &commonCfg)
+	var commonCfg cnfParse.CommonT
+	cnfParse.ParseCommonCfg(*common, &commonCfg)
 }
