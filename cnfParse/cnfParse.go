@@ -1,4 +1,4 @@
-package main
+package cnfParse
 
 import (
 	"bufio"
@@ -7,22 +7,6 @@ import (
 	"strconv"
 	"strings"
 )
-
-type peerT struct {
-	id    uint32
-	hName string
-	port  uint32
-	self  bool
-}
-
-type commonT struct {
-	nPrefNbrs uint32
-	uChoke    uint32
-	uChokeOp  uint32
-	fName     string
-	fSz       uint32
-	pcSz      uint32
-}
 
 func fileRead(fName string, res [][]string) {
 	file, err := os.Open(fName)
@@ -51,32 +35,32 @@ func strTou32Safe(str string) uint32 {
 	return uint32(ret)
 }
 
-func parsePeerInfo(peerinfo string, res []peerT) {
+func ParsePeerInfo(peerinfo string, res []PeerT) {
 	var peers [][]string
 	fileRead(peerinfo, peers)
 
 	for _, peerLine := range peers {
-		peer := peerT{
-			id:    strTou32Safe(peerLine[0]),
-			hName: peerLine[1],
-			port:  strTou32Safe(peerLine[2]),
-			self:  strTou32Safe(peerLine[3]) != 0,
+		peer := PeerT{
+			Id:    strTou32Safe(peerLine[0]),
+			HName: peerLine[1],
+			Port:  strTou32Safe(peerLine[2]),
+			Self:  strTou32Safe(peerLine[3]) != 0,
 		}
 
 		res = append(res, peer)
 	}
 }
 
-func parseCommonCfg(common string, ret *commonT) {
+func ParseCommonCfg(common string, ret *CommonT) {
 	var lines [][]string
 	fileRead(common, lines)
 
-	(*ret) = commonT{
-		nPrefNbrs: strTou32Safe(lines[0][1]),
-		uChoke:    strTou32Safe(lines[1][1]),
-		uChokeOp:  strTou32Safe(lines[2][1]),
-		fName:     lines[3][1],
-		fSz:       strTou32Safe(lines[4][1]),
-		pcSz:      strTou32Safe(lines[4][1]),
+	(*ret) = CommonT{
+		NPrefNbrs: strTou32Safe(lines[0][1]),
+		UChoke:    strTou32Safe(lines[1][1]),
+		UChokeOp:  strTou32Safe(lines[2][1]),
+		FName:     lines[3][1],
+		FSz:       strTou32Safe(lines[4][1]),
+		PcSz:      strTou32Safe(lines[4][1]),
 	}
 }
