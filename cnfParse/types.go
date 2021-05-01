@@ -1,13 +1,13 @@
 package cnfParse
 
-type PeerT struct {
+type PeerCfgT struct {
 	Id    uint32
 	HName string
 	Port  uint32
 	Self  bool
 }
 
-type CommonT struct {
+type CommonCfgT struct {
 	NPrefNbrs uint32
 	UChoke    uint32
 	UChokeOp  uint32

@@ -13,10 +13,10 @@ func main() {
 	flag.Parse()
 
 	// Parse the peerInfo
-	var peers []cnfParse.PeerT
+	var peers []cnfParse.PeerCfgT
 	cnfParse.ParsePeerInfo(*peerInfo, peers)
 
 	// Parse the Common
-	var commonCfg cnfParse.CommonT
+	var commonCfg cnfParse.CommonCfgT
 	cnfParse.ParseCommonCfg(*common, &commonCfg)
 }
