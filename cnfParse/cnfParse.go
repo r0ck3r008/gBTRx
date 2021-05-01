@@ -35,12 +35,12 @@ func strTou32Safe(str string) uint32 {
 	return uint32(ret)
 }
 
-func ParsePeerInfo(peerinfo string, res []PeerT) {
+func ParsePeerInfo(peerinfo string, res []PeerCfgT) {
 	var peers [][]string
 	fileRead(peerinfo, peers)
 
 	for _, peerLine := range peers {
-		peer := PeerT{
+		peer := PeerCfgT{
 			Id:    strTou32Safe(peerLine[0]),
 			HName: peerLine[1],
 			Port:  strTou32Safe(peerLine[2]),
@@ -51,11 +51,11 @@ func ParsePeerInfo(peerinfo string, res []PeerT) {
 	}
 }
 
-func ParseCommonCfg(common string, ret *CommonT) {
+func ParseCommonCfg(common string, ret *CommonCfgT) {
 	var lines [][]string
 	fileRead(common, lines)
 
-	(*ret) = CommonT{
+	(*ret) = CommonCfgT{
 		NPrefNbrs: strTou32Safe(lines[0][1]),
 		UChoke:    strTou32Safe(lines[1][1]),
 		UChokeOp:  strTou32Safe(lines[2][1]),
