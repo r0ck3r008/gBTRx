@@ -6,13 +6,14 @@ import (
 	"os"
 	"strconv"
 	"strings"
+
+	"github.com/r0ck3r008/gBTRx/utils"
 )
 
 func fileRead(fName string, res [][]string) {
 	file, err := os.Open(fName)
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "%s\n", err)
-		os.Exit(1)
+		utils.ErrExit(err, fmt.Sprintf("Open %s", fName))
 	}
 	defer file.Close()
 
@@ -28,8 +29,7 @@ func strTou32Safe(str string) uint32 {
 	var ret int64
 	var err error
 	if ret, err = strconv.ParseInt(str, 10, 32); err != nil {
-		fmt.Fprintf(os.Stderr, "%s\n", err)
-		os.Exit(1)
+		utils.ErrExit(err, "ParseInt")
 	}
 
 	return uint32(ret)
